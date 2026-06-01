@@ -4,12 +4,52 @@ import MorphAnimation from "@/components/MorphAnimation";
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
+  const [typedText, setTypedText] = useState("");
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const phrases = [
+    "Building the future.",
+    "AI for everyone.",
+    "Intelligence everywhere.",
+    "Solve real problems.",
+    "Ship with purpose.",
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Typing animation effect
+  useEffect(() => {
+    const currentPhrase = phrases[phraseIndex];
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing
+        if (charIndex < currentPhrase.length) {
+          setTypedText(currentPhrase.substring(0, charIndex + 1));
+          setCharIndex(charIndex + 1);
+        } else {
+          // Wait before deleting
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        // Deleting
+        if (charIndex > 0) {
+          setTypedText(currentPhrase.substring(0, charIndex - 1));
+          setCharIndex(charIndex - 1);
+        } else {
+          setIsDeleting(false);
+          setPhraseIndex((prev) => (prev + 1) % phrases.length);
+        }
+      }
+    }, isDeleting ? 50 : 100);
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, phraseIndex]);
 
   return (
     <section
@@ -103,28 +143,61 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Stats Bar - At bottom */}
-      <div className="hero-stats" style={{ position: "relative", zIndex: 10, display: "flex", justifyContent: "flex-end", gap: "3rem", padding: "0 4rem 2rem 0", animation: "fadeUp 0.8s ease 0.4s both" }}>
-        {[
-          { number: "01", label: "Product Shipped" },
-          { number: "∞", label: "Custom Builds" },
-          { number: "EST.", label: "2025" },
-        ].map((stat) => (
-          <div key={stat.label} style={{ textAlign: "right" }}>
-            <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "1.5rem", fontWeight: "700", color: "var(--text-primary)" }}>
-              {stat.number}
+      {/* Stats Bar - At bottom with typing animation above it on desktop */}
+      <div className="hero-stats-container" style={{ position: "relative", zIndex: 10, padding: "0 4rem 2rem 0", animation: "fadeUp 0.8s ease 0.4s both" }}>
+        {/* Typing Animation - Desktop only */}
+        <div className="hero-typing" style={{ textAlign: "right", marginBottom: "1rem" }}>
+          <span
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "0.85rem",
+              color: "rgba(201,168,76,0.8)",
+              letterSpacing: "0.05em",
+            }}
+          >
+            {typedText}
+            <span
+              style={{
+                display: "inline-block",
+                width: "2px",
+                height: "1rem",
+                backgroundColor: "#c9a84c",
+                marginLeft: "2px",
+                animation: "blink 1s step-end infinite",
+                verticalAlign: "middle",
+              }}
+            />
+          </span>
+        </div>
+
+        {/* Stats */}
+        <div className="hero-stats" style={{ display: "flex", justifyContent: "flex-end", gap: "3rem" }}>
+          {[
+            { number: "01", label: "Product Shipped" },
+            { number: "∞", label: "Custom Builds" },
+            { number: "EST.", label: "2025" },
+          ].map((stat) => (
+            <div key={stat.label} style={{ textAlign: "right" }}>
+              <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "1.5rem", fontWeight: "700", color: "var(--text-primary)" }}>
+                {stat.number}
+              </div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "var(--text-secondary)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                {stat.label}
+              </div>
             </div>
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "var(--text-secondary)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-              {stat.label}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <style>{`
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
         }
 
         /* Mobile styles */
@@ -135,13 +208,12 @@ export default function Hero() {
 
           .hero-content {
             padding: 0 1.25rem !important;
-            margin-top: 0 !important;
+            margin-top: 2rem !important;
           }
 
           .hero-content h1 {
             font-size: clamp(2rem, 8vw, 2.8rem) !important;
             line-height: 1.15 !important;
-            margin-top: 0 !important;
           }
 
           .hero-content p {
@@ -153,8 +225,11 @@ export default function Hero() {
             font-size: 0.8rem !important;
           }
 
-          .hero-stats {
+          .hero-stats-container {
             padding: 0 1.25rem 1.5rem 0 !important;
+          }
+
+          .hero-stats {
             gap: 1.5rem !important;
           }
 
@@ -164,6 +239,11 @@ export default function Hero() {
 
           .hero-stats div div:last-child {
             font-size: 0.5rem !important;
+          }
+
+          /* Hide typing animation on mobile */
+          .hero-typing {
+            display: none !important;
           }
         }
       `}</style>

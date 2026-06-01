@@ -41,27 +41,31 @@ export default function Navbar() {
           left: 0,
           right: 0,
           zIndex: 100,
-          padding: "1.2rem 3rem",
+          height: "80px",
+          padding: "0.8rem 1.5rem",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           background: scrolled
-            ? "rgba(8,8,10,0.75)"
-            : "rgba(8,8,10,0.45)",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
+            ? "rgba(8,8,10,0.95)"
+            : "rgba(8,8,10,0.85)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
           borderBottom: "1px solid rgba(255,255,255,0.06)",
-          transition: "all 0.4s ease",
+          transition: "all 0.3s ease",
         }}
       >
-        {/* Logo - Shifted left on mobile */}
+        {/* Logo */}
         <Link
           href="/"
+          className="logo-link"
           style={{
             textDecoration: "none",
             display: "flex",
             alignItems: "center",
             gap: "0.8rem",
+            minWidth: 0,
+            overflow: "hidden",
             flex: 1,
           }}
         >
@@ -70,68 +74,49 @@ export default function Navbar() {
             alt="Lee Henry AI & Technology"
             width={48}
             height={48}
-            style={{ borderRadius: "10px" }}
+            className="logo-image"
+            style={{ borderRadius: "10px", flexShrink: 0 }}
           />
-          <div style={{ display: "flex", alignItems: "baseline", gap: "0.3rem" }}>
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: "700",
-                fontSize: "1rem",
-                color: "#f0f0f0",
-                letterSpacing: "-0.02em",
-              }}
-            >
+          <div className="logo-text" style={{ display: "flex", alignItems: "baseline", gap: "0.3rem", overflow: "hidden" }}>
+            <span className="logo-name" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "1.2rem", color: "#f0f0f0", whiteSpace: "nowrap" }}>
               Lee Henry
             </span>
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: "900",
-                fontSize: "0.55rem",
-                color: "#c9a84c",
-                letterSpacing: "0.05em",
-              }}
-            >
+            <span className="logo-tag" style={{ fontFamily: "Inter, sans-serif", fontWeight: 900, fontSize: "0.65rem", color: "#c9a84c", letterSpacing: "0.05em", whiteSpace: "nowrap" }}>
               AI & TECHNOLOGY
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: "2.5rem" }}>
+        <div className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               style={{
                 fontFamily: "Inter, sans-serif",
-                fontSize: "0.85rem",
+                fontSize: "0.9rem",
                 color: pathname === link.href ? "#c9a84c" : "#9a9a9a",
                 textDecoration: "none",
                 letterSpacing: "0.04em",
                 textTransform: "uppercase",
                 transition: "color 0.2s",
-                borderBottom:
-                  pathname === link.href
-                    ? "1px solid #c9a84c"
-                    : "1px solid transparent",
+                borderBottom: pathname === link.href ? "1px solid #c9a84c" : "1px solid transparent",
                 paddingBottom: "2px",
               }}
             >
               {link.label}
             </Link>
           ))}
-
           <Link
             href="/work-with-us"
             style={{
               fontFamily: "Inter, sans-serif",
-              fontSize: "0.85rem",
+              fontSize: "0.9rem",
               fontWeight: "600",
               color: "#080808",
               background: "#f5f5f5",
-              padding: "0.55rem 1.3rem",
+              padding: "0.55rem 1.2rem",
               borderRadius: "6px",
               textDecoration: "none",
               letterSpacing: "0.03em",
@@ -155,19 +140,26 @@ export default function Navbar() {
             flexShrink: 0,
           }}
         >
-          {menuOpen ? <X size={32} /> : <Menu size={32} />}
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </nav>
 
       {/* Mobile Menu */}
       {menuOpen && (
         <div
+          className="mobile-menu-overlay"
           style={{
             position: "fixed",
-            inset: 0,
+            top: "80px",
+            left: 0,
+            right: 0,
+            bottom: 0,
             zIndex: 99,
-            background: "#1f1f21",
-            padding: "110px 20px 40px",
+            background: "#0a0a0a",
+            padding: "1.5rem 1.25rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
@@ -177,49 +169,46 @@ export default function Navbar() {
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "1.2rem",
+                  fontWeight: "500",
+                  color: pathname === link.href ? "#c9a84c" : "#ffffff",
+                  textDecoration: "none",
+                  padding: "0.4rem 0",
+                  borderBottom: "1px solid rgba(255,255,255,0.06)",
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  padding: "1rem 1.25rem",
-                  borderRadius: "18px",
-                  background: "rgba(255,255,255,0.05)",
-                  color: pathname === link.href ? "#ffffff" : "rgba(255,255,255,0.7)",
-                  textDecoration: "none",
-                  fontSize: "1.15rem",
-                  fontWeight: 600,
                 }}
               >
-                <span>{link.label}</span>
-                <span>›</span>
+                {link.label}
+                <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "1rem" }}>→</span>
               </Link>
             ))}
           </div>
 
-          <div
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "65%",
-              transform: "translate(-50%, -50%)",
-              opacity: 0.18,
-            }}
-          >
-            <Image src="/logo.png" alt="Lee Henry AI & Technology" width={180} height={180} />
+          <div style={{ textAlign: "center", margin: "2rem 0", minHeight: "80px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", fontWeight: "400", color: "rgba(201,168,76,0.8)", letterSpacing: "0.02em" }}>
+              <TypingAnimation />
+            </div>
           </div>
 
-          <div style={{ position: "absolute", left: "20px", right: "20px", bottom: "40px" }}>
+          <div>
             <Link
               href="/work-with-us"
               onClick={() => setMenuOpen(false)}
               style={{
                 display: "block",
+                width: "100%",
                 textAlign: "center",
-                padding: "1rem",
-                borderRadius: "12px",
-                background: "#f5f5f5",
+                fontFamily: "Inter, sans-serif",
+                fontSize: "0.9rem",
+                fontWeight: "600",
                 color: "#080808",
+                background: "#f5f5f5",
+                padding: "0.8rem",
+                borderRadius: "8px",
                 textDecoration: "none",
-                fontWeight: 700,
               }}
             >
               Work With Us
@@ -233,6 +222,11 @@ export default function Navbar() {
           display: none;
         }
 
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+
         @media (max-width: 768px) {
           .desktop-nav {
             display: none !important;
@@ -241,12 +235,96 @@ export default function Navbar() {
           .mobile-menu-btn {
             display: block !important;
           }
-          
+
           .navbar {
-            padding: 1rem 1.25rem !important;
+            height: 70px !important;
+            padding: 0.6rem 1rem !important;
+          }
+
+          .logo-link {
+            gap: 0.5rem !important;
+          }
+
+          .logo-image {
+            width: 36px !important;
+            height: 36px !important;
+          }
+
+          .logo-name {
+            font-size: 0.9rem !important;
+          }
+
+          .logo-tag {
+            font-size: 0.45rem !important;
+          }
+
+          .mobile-menu-btn svg {
+            width: 24px !important;
+            height: 24px !important;
+          }
+
+          .mobile-menu-overlay {
+            top: 70px !important;
           }
         }
       `}</style>
+    </>
+  );
+}
+
+// Typing Animation Component
+function TypingAnimation() {
+  const [typedText, setTypedText] = useState("");
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const phrases = [
+    "Building the future.",
+    "AI for everyone.",
+    "Intelligence everywhere.",
+    "Solve real problems.",
+    "Ship with purpose.",
+  ];
+
+  useEffect(() => {
+    const currentPhrase = phrases[phraseIndex];
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        if (charIndex < currentPhrase.length) {
+          setTypedText(currentPhrase.substring(0, charIndex + 1));
+          setCharIndex(charIndex + 1);
+        } else {
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        if (charIndex > 0) {
+          setTypedText(currentPhrase.substring(0, charIndex - 1));
+          setCharIndex(charIndex - 1);
+        } else {
+          setIsDeleting(false);
+          setPhraseIndex((prev) => (prev + 1) % phrases.length);
+        }
+      }
+    }, isDeleting ? 50 : 100);
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, phraseIndex]);
+
+  return (
+    <>
+      {typedText}
+      <span
+        style={{
+          display: "inline-block",
+          width: "2px",
+          height: "1rem",
+          backgroundColor: "#c9a84c",
+          marginLeft: "2px",
+          animation: "blink 1s step-end infinite",
+          verticalAlign: "middle",
+        }}
+      />
     </>
   );
 }
