@@ -74,16 +74,17 @@ export default function ServicesPage() {
   const ctaVis = useVisible(0.3);
 
   return (
-    <main>
+    <main style={{ overflowX: "hidden" }}>
       <Navbar />
 
       {/* Hero */}
       <section
+        className="services-hero"
         style={{
-          minHeight: "60vh",
+          minHeight: "50vh",
           display: "flex",
           alignItems: "flex-end",
-          padding: "12rem 4rem 6rem",
+          padding: "10rem 4rem 5rem",
           position: "relative",
           overflow: "hidden",
           borderBottom: "1px solid rgba(255,255,255,0.06)",
@@ -116,12 +117,12 @@ export default function ServicesPage() {
               Custom Builds
             </span>
           </div>
-          <h1 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(3rem, 7vw, 6rem)", fontWeight: "700", letterSpacing: "-0.04em", lineHeight: "1", marginBottom: "1.5rem" }}>
+          <h1 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(2.5rem, 7vw, 6rem)", fontWeight: "700", letterSpacing: "-0.04em", lineHeight: "1.1", marginBottom: "1rem" }}>
             What We Build
             <br />
             <span style={{ color: "var(--text-secondary)" }}>For Your Business.</span>
           </h1>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.1rem", color: "var(--text-secondary)", maxWidth: "500px", lineHeight: "1.7" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.9rem, 3vw, 1.1rem)", color: "var(--text-secondary)", maxWidth: "500px", lineHeight: "1.6" }}>
             We don't sell generic software. We come into your business, understand your problems, and build exactly what you need.
           </p>
         </div>
@@ -134,8 +135,9 @@ export default function ServicesPage() {
 
       {/* Process */}
       <section
+        className="process-section"
         style={{
-          padding: "8rem 4rem",
+          padding: "6rem 4rem",
           background: "var(--bg-secondary)",
           borderTop: "1px solid rgba(255,255,255,0.06)",
         }}
@@ -156,11 +158,11 @@ export default function ServicesPage() {
               How We Work
             </span>
           </div>
-          <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: "700", letterSpacing: "-0.03em", marginBottom: "5rem" }}>
+          <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(1.8rem, 4vw, 3.5rem)", fontWeight: "700", letterSpacing: "-0.03em", marginBottom: "3rem" }}>
             From problem to
             <span style={{ color: "var(--text-secondary)" }}> live system.</span>
           </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2rem" }}>
+          <div className="process-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2rem" }}>
             {process.map((step, index) => (
               <div
                 key={index}
@@ -175,10 +177,10 @@ export default function ServicesPage() {
                 <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "var(--purple)", letterSpacing: "0.1em", display: "block", marginBottom: "1rem" }}>
                   {step.step}
                 </span>
-                <h3 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "1.4rem", fontWeight: "700", letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>
+                <h3 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(1.2rem, 2.5vw, 1.4rem)", fontWeight: "700", letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>
                   {step.title}
                 </h3>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "var(--text-secondary)", lineHeight: "1.6" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.85rem, 1.8vw, 0.9rem)", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   {step.desc}
                 </p>
               </div>
@@ -189,8 +191,9 @@ export default function ServicesPage() {
 
       {/* CTA */}
       <section
+        className="cta-section"
         style={{
-          padding: "8rem 4rem",
+          padding: "6rem 4rem",
           textAlign: "center",
           borderTop: "1px solid rgba(255,255,255,0.06)",
         }}
@@ -205,11 +208,11 @@ export default function ServicesPage() {
             transition: "all 0.8s ease",
           }}
         >
-          <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: "700", letterSpacing: "-0.03em", marginBottom: "1.5rem" }}>
+          <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(1.8rem, 4vw, 3.5rem)", fontWeight: "700", letterSpacing: "-0.03em", marginBottom: "1rem" }}>
             Ready to get
             <span style={{ color: "var(--teal)" }}> intelligent?</span>
           </h2>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: "var(--text-secondary)", lineHeight: "1.7", marginBottom: "3rem" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.9rem, 2.5vw, 1rem)", color: "var(--text-secondary)", lineHeight: "1.7", marginBottom: "2rem" }}>
             Tell us your business problem. We'll come back with exactly how we'd solve it.
           </p>
           <a
@@ -217,10 +220,10 @@ export default function ServicesPage() {
             style={{
               fontFamily: "Inter, sans-serif",
               fontWeight: "600",
-              fontSize: "0.95rem",
+              fontSize: "clamp(0.85rem, 2vw, 0.95rem)",
               color: "#080808",
               background: "#f5f5f5",
-              padding: "1rem 2.5rem",
+              padding: "0.8rem 2rem",
               borderRadius: "4px",
               textDecoration: "none",
               display: "inline-block",
@@ -233,6 +236,33 @@ export default function ServicesPage() {
 
       <Footer />
       <BackToTop />
+
+      <style>{`
+        @media (max-width: 768px) {
+          .services-hero {
+            padding: 8rem 0rem 3rem 0rem !important;
+          }
+          .services-hero > div {
+            padding: 0 1rem !important;
+          }
+          .process-section {
+            padding: 4rem 0rem !important;
+          }
+          .process-section > div {
+            padding: 0 1rem !important;
+          }
+          .cta-section {
+            padding: 4rem 0rem !important;
+          }
+          .cta-section > div {
+            padding: 0 1rem !important;
+          }
+          .process-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }
@@ -243,24 +273,27 @@ function ServiceSection({ service, reverse }: { service: typeof services[0], rev
   return (
     <section
       ref={ref}
+      className="service-section"
       style={{
-        padding: "6rem 4rem",
+        padding: "5rem 4rem",
         borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}
     >
       <div
+        className="service-container"
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          gap: "6rem",
+          gap: "4rem",
           alignItems: "center",
           direction: reverse ? "rtl" : "ltr",
         }}
       >
         {/* Image */}
         <div
+          className="service-image"
           style={{
             direction: "ltr",
             opacity: visible ? 1 : 0,
@@ -282,6 +315,7 @@ function ServiceSection({ service, reverse }: { service: typeof services[0], rev
 
         {/* Content */}
         <div
+          className="service-content"
           style={{
             direction: "ltr",
             opacity: visible ? 1 : 0,
@@ -292,16 +326,16 @@ function ServiceSection({ service, reverse }: { service: typeof services[0], rev
           <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: service.color, letterSpacing: "0.15em", textTransform: "uppercase", display: "block", marginBottom: "0.5rem" }}>
             {service.number}
           </span>
-          <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: "700", letterSpacing: "-0.03em", marginBottom: "0.5rem" }}>
+          <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.8rem)", fontWeight: "700", letterSpacing: "-0.03em", marginBottom: "0.5rem" }}>
             {service.title}
           </h2>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: service.color, marginBottom: "1.5rem", fontStyle: "italic" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.9rem, 2vw, 1rem)", color: service.color, marginBottom: "1rem", fontStyle: "italic" }}>
             {service.tagline}
           </p>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", color: "var(--text-secondary)", lineHeight: "1.7", marginBottom: "2rem" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.85rem, 2vw, 0.95rem)", color: "var(--text-secondary)", lineHeight: "1.7", marginBottom: "1.5rem" }}>
             {service.description}
           </p>
-          <div style={{ marginBottom: "2rem" }}>
+          <div style={{ marginBottom: "1.5rem" }}>
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "var(--text-dim)", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: "0.75rem" }}>
               What's Included
             </span>
@@ -309,20 +343,51 @@ function ServiceSection({ service, reverse }: { service: typeof services[0], rev
               {service.includes.map((item) => (
                 <div key={item} style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                   <div style={{ width: "4px", height: "4px", borderRadius: "50%", background: service.color, flexShrink: 0 }} />
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "var(--text-secondary)" }}>{item}</span>
+                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.8rem, 1.8vw, 0.9rem)", color: "var(--text-secondary)" }}>{item}</span>
                 </div>
               ))}
             </div>
           </div>
           <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
             {service.industries.map((ind) => (
-              <span key={ind} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "var(--text-dim)", border: "1px solid rgba(255,255,255,0.06)", padding: "0.3rem 0.7rem", borderRadius: "100px" }}>
+              <span key={ind} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", color: "var(--text-dim)", border: "1px solid rgba(255,255,255,0.06)", padding: "0.3rem 0.7rem", borderRadius: "100px" }}>
                 {ind}
               </span>
             ))}
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .service-section {
+            padding: 3rem 0rem !important;
+          }
+          .service-container {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+            direction: ltr !important;
+            padding: 0 1rem !important;
+          }
+          .service-image {
+            height: 250px !important;
+            order: ${reverse ? 2 : 1} !important;
+          }
+          .service-content {
+            order: ${reverse ? 1 : 2} !important;
+            text-align: center !important;
+          }
+          .service-content div[style*="display: flex"][style*="flex-direction: column"] {
+            align-items: center !important;
+          }
+          .service-content div[style*="display: flex"][style*="gap: 0.75rem"] {
+            justify-content: center !important;
+          }
+          .service-content div[style*="display: flex"][style*="flex-wrap: wrap"] {
+            justify-content: center !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

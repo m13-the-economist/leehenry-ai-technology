@@ -17,6 +17,7 @@ export default function FeaturedWork() {
   return (
     <section
       ref={ref}
+      className="featured-work-section"
       style={{
         padding: "8rem 4rem",
         maxWidth: "1200px",
@@ -57,8 +58,7 @@ export default function FeaturedWork() {
         }}
         onClick={() => window.open("https://marketllama.com", "_blank")}
       >
-        {/* Product screenshot */}
-        <div style={{ position: "relative", height: "500px", overflow: "hidden" }}>
+        <div className="featured-card-image" style={{ position: "relative", height: "450px" }}>
           <img
             src="/marketllama.png"
             alt="Market Llama"
@@ -67,30 +67,18 @@ export default function FeaturedWork() {
               height: "100%",
               objectFit: "cover",
               objectPosition: "top",
-              filter: "brightness(0.45)",
+              filter: "brightness(0.4)",
+              transition: "filter 0.4s ease",
             }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLImageElement).style.filter = "brightness(0.55)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLImageElement).style.filter = "brightness(0.4)"; }}
           />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.2) 60%, transparent 100%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 80% 30%, rgba(124,58,237,0.12) 0%, transparent 50%)" }} />
 
-          {/* Overlay gradient */}
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.3) 60%, transparent 100%)" }} />
-
-          {/* Content overlay */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              padding: "3rem",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              flexWrap: "wrap",
-              gap: "2rem",
-            }}
-          >
+          <div className="featured-card-content" style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "3rem", display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "2rem" }}>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1rem", flexWrap: "wrap" }}>
                 <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "var(--gold)", letterSpacing: "0.15em", textTransform: "uppercase" }}>
                   AI Trading Intelligence
                 </span>
@@ -101,18 +89,32 @@ export default function FeaturedWork() {
               <h3 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: "700", letterSpacing: "-0.03em", color: "#f5f5f5", marginBottom: "0.75rem" }}>
                 Market Llama
               </h3>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: "rgba(255,255,255,0.6)", maxWidth: "500px", lineHeight: "1.6" }}>
-               A full AI-powered trading intelligence platform.
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.85rem, 2vw, 1rem)", color: "rgba(255,255,255,0.6)", maxWidth: "500px", lineHeight: "1.5" }}>
+                A full AI-powered trading intelligence platform.
               </p>
             </div>
-
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "1.5rem" }}>
-
-              <div style={{ width: "52px", height: "52px", borderRadius: "50%", border: "1px solid rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "#f5f5f5", fontSize: "1.3rem" }}>
-                ↗
-              </div>
+            <div style={{ width: "48px", height: "48px", borderRadius: "50%", border: "1px solid rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "#f5f5f5", fontSize: "1.2rem", flexShrink: 0 }}>
+              ↗
             </div>
           </div>
+        </div>
+
+        {/* Stats row - hidden on mobile */}
+        <div className="featured-stats" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)" }}>
+          {[
+            { label: "Type", value: "Progressive Web App" },
+            { label: "AI Stack", value: "Claude AI Integration" },
+            { label: "Status", value: "Live at marketllama.com" },
+          ].map((stat) => (
+            <div key={stat.label} style={{ padding: "1.5rem 2rem", borderRight: "1px solid rgba(255,255,255,0.06)" }}>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "var(--text-dim)", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: "0.4rem" }}>
+                {stat.label}
+              </span>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.8rem, 1.5vw, 0.95rem)", color: "var(--text-primary)", fontWeight: "500" }}>
+                {stat.value}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -141,6 +143,29 @@ export default function FeaturedWork() {
           View All Our Work →
         </a>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .featured-work-section {
+            padding: 4rem 1.25rem !important;
+          }
+          .featured-card-image {
+            height: 280px !important;
+          }
+          .featured-card-content {
+            padding: 1.5rem !important;
+          }
+          .featured-card-content h3 {
+            font-size: 1.5rem !important;
+          }
+          .featured-card-content p {
+            font-size: 0.75rem !important;
+          }
+          .featured-stats {
+            display: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

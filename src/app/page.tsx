@@ -9,7 +9,7 @@ import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   return (
-    <main>
+    <main style={{ overflowX: "hidden" }}>
       <Navbar />
       <Hero />
       <Intro />

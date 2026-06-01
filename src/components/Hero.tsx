@@ -13,44 +13,31 @@ export default function Hero() {
 
   return (
     <section
+      className="hero-section"
       style={{
         minHeight: "100vh",
         position: "relative",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "flex-end",
-        padding: "8rem 0 6rem 0",
+        justifyContent: "space-between",
+        padding: "8rem 0 0 0",
       }}
     >
       <MorphAnimation />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.4) 60%, transparent 100%)", zIndex: 2 }} />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(8,8,8,0.8) 0%, transparent 60%)", zIndex: 2 }} />
 
-      <div style={{ position: "relative", zIndex: 10, padding: "0 4rem", maxWidth: "1200px" }}>
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            marginBottom: "2rem",
-            animation: "fadeUp 0.8s ease forwards",
-          }}
-        >
-          <div style={{ width: "32px", height: "1px", background: "var(--teal)" }} />
-          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "var(--teal)", letterSpacing: "0.2em", textTransform: "uppercase" }}>
-            Lee Henry AI & Technology
-          </span>
-        </div>
-
+      {/* Main Content - Centered vertically */}
+      <div className="hero-content" style={{ position: "relative", zIndex: 10, padding: "0 4rem", maxWidth: "1200px", width: "100%", margin: "auto 0", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
         <h1
           style={{
             fontFamily: "'Clash Display', sans-serif",
-            fontSize: "clamp(3rem, 9vw, 7rem)",
+            fontSize: "clamp(2.8rem, 9vw, 7rem)",
             fontWeight: "700",
-            lineHeight: "0.95",
+            lineHeight: "0.92",
             letterSpacing: "-0.04em",
-            marginBottom: "2rem",
+            marginBottom: "1rem",
             animation: "fadeUp 0.8s ease 0.1s both",
           }}
         >
@@ -62,11 +49,11 @@ export default function Hero() {
         <p
           style={{
             fontFamily: "Inter, sans-serif",
-            fontSize: "1.1rem",
+            fontSize: "clamp(1rem, 4vw, 1.1rem)",
             color: "var(--text-secondary)",
             maxWidth: "550px",
-            lineHeight: "1.7",
-            marginBottom: "3rem",
+            lineHeight: "1.6",
+            marginBottom: "2rem",
             animation: "fadeUp 0.8s ease 0.2s both",
           }}
         >
@@ -116,17 +103,8 @@ export default function Hero() {
         </div>
       </div>
 
-      <div
-        style={{
-          position: "absolute",
-          bottom: "2rem",
-          right: "4rem",
-          display: "flex",
-          gap: "3rem",
-          animation: "fadeUp 0.8s ease 0.4s both",
-          zIndex: 10,
-        }}
-      >
+      {/* Stats Bar - At bottom */}
+      <div className="hero-stats" style={{ position: "relative", zIndex: 10, display: "flex", justifyContent: "flex-end", gap: "3rem", padding: "0 4rem 2rem 0", animation: "fadeUp 0.8s ease 0.4s both" }}>
         {[
           { number: "01", label: "Product Shipped" },
           { number: "∞", label: "Custom Builds" },
@@ -147,6 +125,46 @@ export default function Hero() {
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+          .hero-section {
+            padding: 6rem 0 0 0 !important;
+          }
+
+          .hero-content {
+            padding: 0 1.25rem !important;
+            margin-top: 0 !important;
+          }
+
+          .hero-content h1 {
+            font-size: clamp(2rem, 8vw, 2.8rem) !important;
+            line-height: 1.15 !important;
+            margin-top: 0 !important;
+          }
+
+          .hero-content p {
+            font-size: 0.9rem !important;
+          }
+
+          .hero-content a {
+            padding: 0.7rem 1.2rem !important;
+            font-size: 0.8rem !important;
+          }
+
+          .hero-stats {
+            padding: 0 1.25rem 1.5rem 0 !important;
+            gap: 1.5rem !important;
+          }
+
+          .hero-stats div div:first-child {
+            font-size: 1rem !important;
+          }
+
+          .hero-stats div div:last-child {
+            font-size: 0.5rem !important;
+          }
         }
       `}</style>
     </section>

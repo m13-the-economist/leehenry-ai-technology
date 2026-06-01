@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import BackToTop from "@/components/BackToTop"
+import BackToTop from "@/components/BackToTop";
 
 function useVisible(threshold = 0.2) {
   const ref = useRef<HTMLDivElement>(null);
@@ -26,11 +26,22 @@ export default function AboutPage() {
   const s5 = useVisible(0.2);
 
   return (
-    <main>
+    <main style={{ overflowX: "hidden" }}>
       <Navbar />
 
       {/* Hero */}
-      <section style={{ minHeight: "70vh", display: "flex", alignItems: "flex-end", padding: "12rem 4rem 6rem", position: "relative", overflow: "hidden", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      <section
+        className="about-hero"
+        style={{
+          minHeight: "70vh",
+          display: "flex",
+          alignItems: "flex-end",
+          padding: "12rem 4rem 6rem",
+          position: "relative",
+          overflow: "hidden",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
         <div style={{ position: "absolute", inset: 0 }}>
           <img
             src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1800&auto=format&fit=crop&q=80"
@@ -59,21 +70,21 @@ export default function AboutPage() {
               Who We Are
             </span>
           </div>
-          <h1 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(3rem, 8vw, 7rem)", fontWeight: "700", letterSpacing: "-0.04em", lineHeight: "0.95", marginBottom: "2rem" }}>
+          <h1 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(2.5rem, 8vw, 7rem)", fontWeight: "700", letterSpacing: "-0.04em", lineHeight: "1.1", marginBottom: "1.5rem" }}>
             Built to make
             <br />
             <span style={{ color: "var(--text-secondary)" }}>intelligence</span>
             <br />
             universal.
           </h1>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.1rem", color: "var(--text-secondary)", maxWidth: "550px", lineHeight: "1.7" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.9rem, 3vw, 1.1rem)", color: "var(--text-secondary)", maxWidth: "550px", lineHeight: "1.6" }}>
             We exist to close the gap between where technology is and where people actually live. AI should not be a privilege. It should be everywhere.
           </p>
         </div>
       </section>
 
-      {/* Story */}
-      <section style={{ padding: "8rem 4rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      {/* Story - Mission */}
+      <section className="about-mission" style={{ padding: "8rem 4rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div
           ref={s2.ref}
           style={{
@@ -81,7 +92,7 @@ export default function AboutPage() {
             margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "1fr 2fr",
-            gap: "6rem",
+            gap: "4rem",
             alignItems: "start",
             opacity: s2.visible ? 1 : 0,
             transform: s2.visible ? "translateY(0)" : "translateY(30px)",
@@ -98,17 +109,17 @@ export default function AboutPage() {
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "var(--text-dim)", letterSpacing: "0.1em" }}>001</span>
           </div>
           <div>
-            <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: "700", letterSpacing: "-0.03em", lineHeight: "1.2", marginBottom: "2rem" }}>
+            <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(1.6rem, 3vw, 2.5rem)", fontWeight: "700", letterSpacing: "-0.03em", lineHeight: "1.2", marginBottom: "1.5rem" }}>
               We are solving the automation problem.
               <span style={{ color: "var(--text-secondary)" }}> One business at a time.</span>
             </h2>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: "var(--text-secondary)", lineHeight: "1.8", marginBottom: "1.5rem" }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.9rem, 2vw, 1rem)", color: "var(--text-secondary)", lineHeight: "1.7", marginBottom: "1rem" }}>
               Across industries, the same story plays out. Businesses are drowning in manual processes, disconnected systems, and decisions made on gut feeling instead of intelligence. The tools to fix this exist. But they are locked behind complexity, cost, and access.
             </p>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: "var(--text-secondary)", lineHeight: "1.8", marginBottom: "1.5rem" }}>
-              That's why we exist. We create technology that actually works for real people whether it's a trading intelligence platform anyone can use, or a custom automation system built for a specific business.
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.9rem, 2vw, 1rem)", color: "var(--text-secondary)", lineHeight: "1.7", marginBottom: "1rem" }}>
+              That's why we exist. We create technology that actually works for real people — whether it's a trading intelligence platform anyone can use, or a custom automation system built for a specific business.
             </p>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: "var(--text-secondary)", lineHeight: "1.8" }}>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.9rem, 2vw, 1rem)", color: "var(--text-secondary)", lineHeight: "1.7" }}>
               Our approach is simple: identify the problem, build the solution, ship it. No unnecessary complexity. No waiting for permission. Just intelligent systems that make life and work better.
             </p>
           </div>
@@ -116,7 +127,7 @@ export default function AboutPage() {
       </section>
 
       {/* Vision */}
-      <section style={{ padding: "8rem 4rem", background: "var(--bg-secondary)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      <section className="about-vision" style={{ padding: "8rem 4rem", background: "var(--bg-secondary)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div
           ref={s3.ref}
           style={{
@@ -127,19 +138,19 @@ export default function AboutPage() {
             transition: "all 0.8s ease",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "3rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2rem" }}>
             <div style={{ width: "24px", height: "1px", background: "var(--gold)" }} />
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "var(--gold)", letterSpacing: "0.2em", textTransform: "uppercase" }}>
               Our Vision
             </span>
           </div>
 
-          <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(2rem, 5vw, 4rem)", fontWeight: "700", letterSpacing: "-0.04em", lineHeight: "1.1", marginBottom: "5rem", maxWidth: "800px" }}>
+          <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(1.8rem, 5vw, 4rem)", fontWeight: "700", letterSpacing: "-0.04em", lineHeight: "1.1", marginBottom: "3rem", maxWidth: "800px" }}>
             A world where intelligence
             <span style={{ color: "var(--teal)" }}> lives in everything.</span>
           </h2>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0" }}>
+          <div className="vision-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0" }}>
             {[
               {
                 number: "01",
@@ -165,6 +176,7 @@ export default function AboutPage() {
             ].map((item, index) => (
               <div
                 key={index}
+                className="vision-item"
                 style={{
                   borderTop: "1px solid rgba(255,255,255,0.06)",
                   borderRight: index < 2 ? "1px solid rgba(255,255,255,0.06)" : "none",
@@ -187,10 +199,10 @@ export default function AboutPage() {
                   <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: item.color, letterSpacing: "0.1em", display: "block", marginBottom: "0.75rem" }}>
                     {item.number}
                   </span>
-                  <h3 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "1.3rem", fontWeight: "700", letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>
+                  <h3 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(1.1rem, 2.5vw, 1.3rem)", fontWeight: "700", letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>
                     {item.title}
                   </h3>
-                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: "var(--text-secondary)", lineHeight: "1.6" }}>
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.8rem, 1.8vw, 0.9rem)", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                     {item.desc}
                   </p>
                 </div>
@@ -201,7 +213,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section style={{ padding: "8rem 4rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      <section className="about-values" style={{ padding: "8rem 4rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div
           ref={s4.ref}
           style={{
@@ -212,13 +224,13 @@ export default function AboutPage() {
             transition: "all 0.8s ease",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "3rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2rem" }}>
             <div style={{ width: "24px", height: "1px", background: "var(--teal)" }} />
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "var(--teal)", letterSpacing: "0.2em", textTransform: "uppercase" }}>
               What We Stand For
             </span>
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className="values-grid" style={{ display: "flex", flexDirection: "column" }}>
             {[
               { title: "Radical Accessibility", desc: "Intelligence should not be gated by budget or geography. We price fairly, build practically, and solve for the real world." },
               { title: "Zero Tolerance for Mediocrity", desc: "Everything we ship is built to the highest standard. If it is not excellent, it does not leave our hands." },
@@ -227,11 +239,12 @@ export default function AboutPage() {
             ].map((value, index) => (
               <div
                 key={index}
+                className="value-item"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "1fr 2fr",
                   gap: "4rem",
-                  padding: "2.5rem 0",
+                  padding: "2rem 0",
                   borderTop: "1px solid rgba(255,255,255,0.06)",
                   alignItems: "center",
                   opacity: s4.visible ? 1 : 0,
@@ -239,10 +252,10 @@ export default function AboutPage() {
                   transition: `all 0.8s ease ${index * 0.1}s`,
                 }}
               >
-                <h3 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "1.2rem", fontWeight: "700", letterSpacing: "-0.02em", color: "var(--text-primary)" }}>
+                <h3 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(1rem, 2vw, 1.2rem)", fontWeight: "700", letterSpacing: "-0.02em", color: "var(--text-primary)" }}>
                   {value.title}
                 </h3>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", color: "var(--text-secondary)", lineHeight: "1.7" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.85rem, 1.8vw, 0.95rem)", color: "var(--text-secondary)", lineHeight: "1.6" }}>
                   {value.desc}
                 </p>
               </div>
@@ -253,7 +266,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: "8rem 4rem", textAlign: "center" }}>
+      <section className="about-cta" style={{ padding: "8rem 4rem", textAlign: "center" }}>
         <div
           ref={s5.ref}
           style={{
@@ -264,11 +277,11 @@ export default function AboutPage() {
             transition: "all 0.8s ease",
           }}
         >
-          <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: "700", letterSpacing: "-0.03em", marginBottom: "1.5rem" }}>
+          <h2 style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(1.8rem, 4vw, 3.5rem)", fontWeight: "700", letterSpacing: "-0.03em", marginBottom: "1rem" }}>
             You found the right
             <span style={{ color: "var(--purple)" }}> team.</span>
           </h2>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", color: "var(--text-secondary)", lineHeight: "1.7", marginBottom: "3rem" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(0.9rem, 2.5vw, 1rem)", color: "var(--text-secondary)", lineHeight: "1.6", marginBottom: "2rem" }}>
             We are hungry, we are capable, and we are ready to build something remarkable with you.
           </p>
           <a
@@ -276,10 +289,10 @@ export default function AboutPage() {
             style={{
               fontFamily: "Inter, sans-serif",
               fontWeight: "600",
-              fontSize: "0.95rem",
+              fontSize: "clamp(0.85rem, 2vw, 0.95rem)",
               color: "#080808",
               background: "#f5f5f5",
-              padding: "1rem 2.5rem",
+              padding: "0.8rem 2rem",
               borderRadius: "4px",
               textDecoration: "none",
               display: "inline-block",
@@ -292,6 +305,55 @@ export default function AboutPage() {
 
       <Footer />
       <BackToTop />
+
+      <style>{`
+        @media (max-width: 768px) {
+          .about-hero {
+            padding: 8rem 0rem 3rem 0rem !important;
+          }
+          .about-hero > div {
+            padding: 0 1rem !important;
+          }
+          .about-mission {
+            padding: 4rem 0rem !important;
+          }
+          .about-mission > div {
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+            padding: 0 1rem !important;
+          }
+          .about-vision {
+            padding: 4rem 0rem !important;
+          }
+          .about-vision > div {
+            padding: 0 1rem !important;
+          }
+          .vision-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .vision-item {
+            border-right: none !important;
+          }
+          .about-values {
+            padding: 4rem 0rem !important;
+          }
+          .about-values > div {
+            padding: 0 1rem !important;
+          }
+          .value-item {
+            grid-template-columns: 1fr !important;
+            gap: 0.75rem !important;
+            text-align: center !important;
+          }
+          .about-cta {
+            padding: 4rem 0rem !important;
+          }
+          .about-cta > div {
+            padding: 0 1rem !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }

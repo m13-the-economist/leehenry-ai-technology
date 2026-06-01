@@ -3,30 +3,12 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer
-      style={{
-        padding: "4rem 3rem 0rem",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-      }}
-    >
+    <footer className="footer" style={{ padding: "4rem 3rem 0rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gap: "4rem",
-            marginBottom: "4rem",
-          }}
-        >
-          <div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.8rem",
-                marginBottom: "1rem",
-              }}
-            >
+        <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "4rem", marginBottom: "4rem" }}>
+          {/* Column 1 - Logo & Tagline */}
+          <div className="logo-col">
+            <div style={{ display: "flex", alignItems: "center", gap: "0.8rem", marginBottom: "1rem" }}>
               <Image
                 src="/logo.png"
                 alt="Lee Henry AI & Technology"
@@ -72,7 +54,8 @@ export default function Footer() {
             </p>
           </div>
 
-          <div>
+          {/* Column 2 - Company Links */}
+          <div className="company-col">
             <span
               style={{
                 fontFamily: "var(--font-dm-mono)",
@@ -111,7 +94,8 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
+          {/* Column 3 - Connect Links */}
+          <div className="connect-col">
             <span
               style={{
                 fontFamily: "var(--font-dm-mono)",
@@ -133,6 +117,7 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Copyright */}
         <div
           style={{
             display: "flex",
@@ -157,6 +142,7 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Large Background Text */}
       <div
         style={{
           marginTop: "3rem",
@@ -203,6 +189,38 @@ export default function Footer() {
           </span>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .footer {
+            padding: 3rem 1.25rem 0rem 1.25rem !important;
+          }
+          .footer-grid {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 2rem !important;
+          }
+          .logo-col {
+            grid-column: span 2 !important;
+            text-align: center !important;
+            align-items: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .company-col {
+            text-align: left !important;
+            align-items: flex-start !important;
+          }
+          .connect-col {
+            text-align: left !important;
+            align-items: flex-start !important;
+          }
+          .footer-grid p {
+            text-align: center !important;
+            margin: 0 auto !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }

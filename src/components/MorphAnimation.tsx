@@ -20,7 +20,7 @@ export default function MorphAnimation() {
     renderer.setClearColor(0x000000, 0);
     mountRef.current.appendChild(renderer.domElement);
 
-    const POINTS = 100; // Reduced from 150
+    const POINTS = 150;
 
     const generateCircuit = (): THREE.Vector3[] => {
       const pts: THREE.Vector3[] = [];
@@ -63,20 +63,20 @@ export default function MorphAnimation() {
 
     const generateRocket = (): THREE.Vector3[] => {
       const pts: THREE.Vector3[] = [];
-      for (let i = 0; i < 30; i++) {
-        const t = i / 30;
+      for (let i = 0; i < 40; i++) {
+        const t = i / 40;
         const angle = t * Math.PI * 2;
         pts.push(new THREE.Vector3(Math.cos(angle) * t * 0.6, 2.5 - t * 1.8, Math.sin(angle) * t * 0.6));
       }
-      for (let i = 0; i < 35; i++) {
-        const t = i / 35;
+      for (let i = 0; i < 50; i++) {
+        const t = i / 50;
         const angle = t * Math.PI * 2 * 5;
         pts.push(new THREE.Vector3(Math.cos(angle) * 0.6, 0.7 - t * 2.4, Math.sin(angle) * 0.6));
       }
       for (let f = 0; f < 4; f++) {
         const fa = (f / 4) * Math.PI * 2;
-        for (let i = 0; i < 10; i++) {
-          const t = i / 10;
+        for (let i = 0; i < 15; i++) {
+          const t = i / 15;
           pts.push(new THREE.Vector3(Math.cos(fa) * (0.6 + t * 0.8), -1.7 + t * 1.2, Math.sin(fa) * (0.6 + t * 0.8)));
         }
       }
@@ -84,33 +84,38 @@ export default function MorphAnimation() {
       return pts.slice(0, POINTS);
     };
 
-    // Unique Geometric Nebula (replaces City)
-    const generateNebula = (): THREE.Vector3[] => {
+    const generateCity = (): THREE.Vector3[] => {
       const pts: THREE.Vector3[] = [];
-      for (let i = 0; i < POINTS; i++) {
-        const t = i / POINTS;
-        const angle = t * Math.PI * 2 * 3;
-        const radius = 2.2 * (1 - t * 0.3);
-        const x = Math.cos(angle) * radius * (1 + Math.sin(t * Math.PI * 6) * 0.2);
-        const y = Math.sin(angle * 1.7) * radius * 0.8;
-        const z = Math.sin(angle * 2.3) * radius * 0.5;
-        pts.push(new THREE.Vector3(x, y, z));
+      const buildings = [
+        { x: -3.5, w: 0.5, h: 1.2 }, { x: -2.8, w: 0.7, h: 2.0 },
+        { x: -2.0, w: 0.6, h: 2.8 }, { x: -1.2, w: 0.5, h: 1.8 },
+        { x: -0.5, w: 0.8, h: 3.5 }, { x: 0.5, w: 0.6, h: 2.2 },
+        { x: 1.3, w: 0.7, h: 4.0 }, { x: 2.2, w: 0.5, h: 2.6 },
+        { x: 2.9, w: 0.6, h: 1.8 }, { x: 3.6, w: 0.5, h: 1.4 },
+      ];
+      const ppp = Math.floor(POINTS / buildings.length);
+      for (const b of buildings) {
+        for (let i = 0; i < ppp; i++) {
+          const t = i / ppp;
+          if (t < 0.3) pts.push(new THREE.Vector3(b.x, -2 + t * 3.33 * b.h, 0));
+          else if (t < 0.6) pts.push(new THREE.Vector3(b.x + (t - 0.3) * 3.33 * b.w, -2 + b.h, 0));
+          else pts.push(new THREE.Vector3(b.x + b.w, -2 + b.h - (t - 0.6) * 2.5 * b.h, 0));
+        }
       }
-      return pts;
+      while (pts.length < POINTS) pts.push(new THREE.Vector3(-4 + Math.random() * 8, -2, 0));
+      return pts.slice(0, POINTS);
     };
 
     const shapes = [
       { fn: generateCircuit, color: 0x0d9488 },
       { fn: generateRocket, color: 0xc9a84c },
-      { fn: generateNebula, color: 0x7c3aed },
+      { fn: generateCity, color: 0x7c3aed },
       { fn: generateSphere, color: 0x0d9488 },
       { fn: generateDNA, color: 0xc9a84c },
     ];
-
-    // Pre-build connections once — don't rebuild every frame
+ 
     let currentPoints = shapes[0].fn();
-
-    // Dots — update positions only
+ 
     const posArray = new Float32Array(POINTS * 3);
     currentPoints.forEach((p, i) => {
       posArray[i * 3] = p.x;
@@ -121,22 +126,20 @@ export default function MorphAnimation() {
     const posAttr = new THREE.BufferAttribute(posArray, 3);
     posAttr.setUsage(THREE.DynamicDrawUsage);
     dotGeom.setAttribute("position", posAttr);
-    const dotMat = new THREE.PointsMaterial({ color: 0x0d9488, size: 0.08, transparent: true, opacity: 0.8 });
+    const dotMat = new THREE.PointsMaterial({ color: 0x0d9488, size: 0.06, transparent: true, opacity: 0.9 });
     const dots = new THREE.Points(dotGeom, dotMat);
     scene.add(dots);
 
-    // Lines — fixed connections, update positions only
-    const MAX_LINES = 200; // Reduced from 400
+    const MAX_LINES = 400;
     const linePositions = new Float32Array(MAX_LINES * 6);
     const lineGeom = new THREE.BufferGeometry();
     const linePosAttr = new THREE.BufferAttribute(linePositions, 3);
     linePosAttr.setUsage(THREE.DynamicDrawUsage);
     lineGeom.setAttribute("position", linePosAttr);
-    const lineMat = new THREE.LineBasicMaterial({ color: 0x0d9488, transparent: true, opacity: 0.5 });
+    const lineMat = new THREE.LineBasicMaterial({ color: 0x0d9488, transparent: true, opacity: 0.6 });
     const lines = new THREE.LineSegments(lineGeom, lineMat);
     scene.add(lines);
-
-    // Pre-compute connection pairs
+ 
     const connections: [number, number][] = [];
     for (let i = 0; i < POINTS; i++) {
       const dists: { idx: number; dist: number }[] = [];
@@ -261,16 +264,28 @@ export default function MorphAnimation() {
   }, []);
 
   return (
-    <div
-      ref={mountRef}
-      style={{
-        position: "absolute",
-        top: 0,
-        right: 0,
-        width: "60%",
-        height: "100%",
-        zIndex: 1,
-      }}
-    />
+    <>
+      <div
+        ref={mountRef}
+        className="morph-animation"
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "60%",
+          height: "100%",
+          zIndex: 1,
+        }}
+      />
+      <style>{`
+        @media (max-width: 768px) {
+          .morph-animation {
+            width: 100% !important;
+            left: 0 !important;
+            right: auto !important;
+          }
+        }
+      `}</style>
+    </>
   );
 }

@@ -17,13 +17,14 @@ export default function Intro() {
   return (
     <section
       ref={ref}
+      className="intro-section"
       style={{
-        padding: "10rem 4rem",
+        padding: "8rem 4rem",
         maxWidth: "1200px",
         margin: "0 auto",
       }}
     >
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "4rem", alignItems: "start" }}>
+      <div className="intro-grid" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "4rem", alignItems: "start" }}>
         {/* Left label */}
         <div
           style={{
@@ -54,7 +55,7 @@ export default function Intro() {
           <h2
             style={{
               fontFamily: "'Clash Display', sans-serif",
-              fontSize: "clamp(2rem, 3.5vw, 3rem)",
+              fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
               fontWeight: "600",
               lineHeight: "1.2",
               letterSpacing: "-0.03em",
@@ -69,25 +70,25 @@ export default function Intro() {
           <p
             style={{
               fontFamily: "Inter, sans-serif",
-              fontSize: "1.05rem",
+              fontSize: "clamp(0.95rem, 2vw, 1.05rem)",
               color: "var(--text-secondary)",
-              lineHeight: "1.8",
-              marginBottom: "2rem",
-              maxWidth: "560px",
+              lineHeight: "1.7",
+              marginBottom: "1.5rem",
+              maxWidth: "100%",
             }}
           >
-            Lee Henry AI & Technology exists to close the gap between where technology is and where people actually live. We build intelligent products anyone can use and custom systems that solve specific business problems.
+            Lee Henry AI & Technology exists to close the gap between where technology is and where people actually live. We build intelligent products anyone can use — and custom systems that solve specific business problems.
           </p>
           <p
             style={{
               fontFamily: "Inter, sans-serif",
-              fontSize: "1.05rem",
+              fontSize: "clamp(0.95rem, 2vw, 1.05rem)",
               color: "var(--text-secondary)",
-              lineHeight: "1.8",
-              maxWidth: "560px",
+              lineHeight: "1.7",
+              maxWidth: "100%",
             }}
           >
-            From Market Llama to logistics automation we've proven we can build. Now we're bringing intelligence to everyone.
+            From Market Llama to logistics automation — we've proven we can build. Now we're bringing intelligence to everyone.
           </p>
 
           {/* Accent line */}
@@ -97,7 +98,8 @@ export default function Intro() {
               paddingTop: "2rem",
               borderTop: "1px solid rgba(255,255,255,0.06)",
               display: "flex",
-              gap: "3rem",
+              gap: "clamp(1.5rem, 4vw, 3rem)",
+              flexWrap: "wrap",
             }}
           >
             {[
@@ -106,10 +108,10 @@ export default function Intro() {
               { value: "24/7", label: "Intelligence", color: "var(--gold)" },
             ].map((item) => (
               <div key={item.label}>
-                <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "1.5rem", fontWeight: "700", color: item.color, marginBottom: "0.25rem" }}>
+                <div style={{ fontFamily: "'Clash Display', sans-serif", fontSize: "clamp(1.2rem, 2.5vw, 1.5rem)", fontWeight: "700", color: item.color, marginBottom: "0.25rem" }}>
                   {item.value}
                 </div>
-                <div style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", color: "var(--text-dim)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                <div style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: "var(--text-dim)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                   {item.label}
                 </div>
               </div>
@@ -117,6 +119,18 @@ export default function Intro() {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .intro-section {
+            padding: 4rem 1.25rem !important;
+          }
+          .intro-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
